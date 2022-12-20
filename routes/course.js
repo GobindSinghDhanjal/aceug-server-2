@@ -7,6 +7,7 @@ const CourseProgress = require("../models/courseProgress");
 const Student = require("../models/student");
 const courseRouter = express.Router();
 const coursePerPage = 2;
+const passport = require("passport");
 
 const mongoose = require("mongoose");
 
@@ -80,10 +81,10 @@ courseRouter
 
 //Handling Enrollment of a student in a course
 courseRouter
-  .route("/enroll/:courseId/student/:studentId")
-  .post(async (req, res, next) => {
+  .route("/enroll/:courseId/")
+  .post(passport.authenticate("jwt", { session: false }),async (req, res, next) => {
     const courseId = req.params.courseId;
-    const studentId = req.params.studentId;
+    const studentId = req.user._id;
 
     //Checking if student is already enrolled
     let check = await CourseEnrollments.exists({

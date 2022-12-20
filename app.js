@@ -19,6 +19,7 @@ const Resource = require("./models/resources");
 const Module = require("./models/modules");
 const Blog = require("./models/blog")
 const TestSeries = require("./models/testSeries");
+const CourseEnrollments = require("./models/courseEnrollments");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -28,6 +29,7 @@ const testSeriesRouter = require("./routes/testseries");
 const studentRouter = require("./routes/student");
 const courseprogressRouter = require("./routes/courseProgress");
 const blogRouter = require("./routes/blog")
+const paymentRouter = require("./routes/payment")
 
 const AdminJS = require("adminjs");
 const AdminJSExpress = require("@adminjs/express");
@@ -132,6 +134,7 @@ const adminOptions = {
     { resource: Course },
     {resource: Blog, options: blogResourceOptions},
     {resource: Instructor},
+    {resource: CourseEnrollments},
     {resource: Resource},
     {resource: Module},
     { resource: Quiz, features: [importExportFeature()] },
@@ -208,6 +211,7 @@ app.use("/progress", progressRouter);
 app.use("/course-progress", courseprogressRouter);
 app.use("/testseries", testSeriesRouter);
 app.use("/student", studentRouter);
-app.use("/blogs", blogRouter)
+app.use("/blogs", blogRouter);
+app.use("/payment", paymentRouter);
 
 module.exports = app;
