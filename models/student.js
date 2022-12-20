@@ -14,6 +14,7 @@ const studentSchema = new Schema({
   salt: { type: String, required: true },
   courses_enrolled: [mongoose.ObjectId],
   series_enrolled: [mongoose.ObjectId],
+  points: {type: Number, default: 0}
 },{
   timestamps: true,
 });

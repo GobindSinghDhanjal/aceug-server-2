@@ -42,6 +42,7 @@ router.post("/login", (req, res, next) => {
     });
 });
 
+
 router.post("/register", (req, res, next) => {
   const saltHash = genPassword(req.body.password);
 
@@ -63,12 +64,11 @@ router.post("/register", (req, res, next) => {
   res.send({success: true, data:{message:"Successfully Registered"}});
 });
 
-router.get(
-  "/protected",
-  passport.authenticate("jwt", { session: false }),
+router.route(
+  "/profile").get(passport.authenticate("jwt", { session: false }),
   (req, res, next) => {
     res.status(200);
-    res.send(req.user);
+    res.json(req.user);
   }
 );
 

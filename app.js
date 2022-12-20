@@ -18,6 +18,7 @@ const Instructor = require("./models/instructor");
 const Resource = require("./models/resources");
 const Module = require("./models/modules");
 const Blog = require("./models/blog")
+const TestSeries = require("./models/testSeries");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -127,6 +128,7 @@ const adminOptions = {
     // },
     { resource: Video },
     { resource: Student },
+    {resource : TestSeries},
     { resource: Course },
     {resource: Blog, options: blogResourceOptions},
     {resource: Instructor},

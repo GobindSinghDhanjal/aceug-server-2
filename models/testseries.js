@@ -9,6 +9,7 @@ const testSeriesSchema = new Schema({
   thumbnail: { type: String, required: true },
   subject: String,
   tags: [String],
+  price: {type: Number, required:true}
 },{
   timestamps: true,
 });
