@@ -28,6 +28,7 @@ const testSchema = new Schema({
   thumbnail: { type: String, required: true },
   subject: String,
   tags: [String],
+  category: {type: String},
   passing_marks: Number,
   sections: [sectionSchema],
 },{

@@ -63,9 +63,19 @@ testSeriesRouter
 
 //Handling Single Tests
 testSeriesRouter
-  .route("/test")
+  .route("/test/:testId")
   .get((req, res, next) => {
-    res.send("ok");
+
+      TestSeries.findById(req.params.testId).populate("tests")
+        .then(
+          (testSeriess) => {
+            res.statusCode = 200;
+            res.setHeader("Content-Type", "application/json");
+            res.json(testSeriess);
+          },
+          (err) => next(err)
+        )
+        .catch((err) => next(err));
   })
   .post((req, res, next) => {
     const data = req.body;

@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const testSeriesSchema = new Schema({
   name: { type: String, required: true },
   days: { type: Number, required: true },
-  tests: [mongoose.ObjectId],
+  tests: [{type: mongoose.ObjectId, ref: 'Test'}],
   thumbnail: { type: String, required: true },
   subject: String,
   tags: [String],

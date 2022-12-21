@@ -39,9 +39,9 @@ router.post("/success",passport.authenticate("jwt", { session: false }), async (
             razorpaySignature,
         } = req.body;
 
-        // console.log(notes);
+        console.log(notes);
 
-        console.log(req.body);
+        // console.log(req.body);
 
         // Creating our own digest
         // The format should be like this:
@@ -56,9 +56,10 @@ router.post("/success",passport.authenticate("jwt", { session: false }), async (
 
         // THE PAYMENT IS LEGIT & VERIFIED
         // YOU CAN SAVE THE DETAILS IN YOUR DATABASE IF YOU WANT
-        const enrolled = enrollStudent(req.user._id, notes.courseId)
 
-       
+        if(notes.courseId){
+            const enrolled = enrollStudent(req.user._id, notes.courseId)
+        }
 
         res.json({
             msg: "success",

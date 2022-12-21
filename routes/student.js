@@ -68,7 +68,9 @@ router.route(
   "/profile").get(passport.authenticate("jwt", { session: false }),
   (req, res, next) => {
     res.status(200);
-    res.json(req.user);
+    const userId = Student.findById(req.user._id).populate("courses_enrolled").then((student)=>{
+      res.send(student)
+    })
   }
 );
 
