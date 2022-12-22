@@ -1,6 +1,6 @@
 const express = require("express");
 
-const TestSeries = require("../models/testSeries");
+const TestSeries = require("../models/testseries");
 const TestSeriesEnrollments = require("../models/testSeriesEnrolments");
 const Student = require("../models/student");
 const Test = require("../models/test");

@@ -1,18 +1,19 @@
-const Course = require("../models/course");
-const CourseEnrollments = require("../models/courseEnrollments");
-const CourseProgress = require("../models/courseProgress");
+const TestSeries = require("../models/testseries");
+const TestSeriesEnrollments = require("../models/testSeriesEnrolments");
+const TestProgress = require("../models/testProgress");
+const C = require("../models/testProgress");
 const mongoose = require("mongoose");
 const Student = require("../models/student");
 
-const enrollStudent = async (studentId, courseId) => {
+const enrollStudentTest = async (studentId, testSeriesId) => {
   
   const enrolled = {
     status: false,
     msg: "",
   };
   //Checking if student is already enrolled
-  let alreadyEnrolledCheck = await CourseEnrollments.exists({
-    course: courseId,
+  let alreadyEnrolledCheck = await TestSeriesEnrollments.exists({
+    testseries: testSeriesId,
     student: studentId,
   });
 
@@ -22,13 +23,13 @@ const enrollStudent = async (studentId, courseId) => {
   });
 
   //Checking if course id is correct
-  let validCourseCheck = await Course.exists({
-    id: courseId,
+  let validTestSeriesCheck = await TestSeries.exists({
+    id: testSeriesId,
   });
-  console.log(alreadyEnrolledCheck, validCourseCheck, validStudentCheck);
+  console.log(alreadyEnrolledCheck, validTestSeriesCheck, validStudentCheck);
 
   if (!alreadyEnrolledCheck) {
-    Course.findById(courseId)
+    TestSeries.findById(testSeriesId)
       .then((course) => {
         console.log(course);
         Student.findById(studentId)
@@ -40,7 +41,7 @@ const enrollStudent = async (studentId, courseId) => {
             last_date.setDate(join_date.getDate() + course.days);
             console.log("Created Last Date");
             const newEnrollment = {
-              course: mongoose.Types.ObjectId(courseId),
+              testseries: mongoose.Types.ObjectId(testSeriesId),
               student: mongoose.Types.ObjectId(studentId),
               join_date: join_date,
               last_date: last_date,
@@ -48,17 +49,21 @@ const enrollStudent = async (studentId, courseId) => {
 
             //Enrolling Student in Course
             console.log("Created New enrollment");
-            CourseEnrollments.create(newEnrollment)
+            TestSeriesEnrollments.create(newEnrollment)
               .then((enrollment) => {
+                console.log("vsdvsdvbkjbjkb");
                 //Create Course Progress Document Here After the User is successfully Enrolled
-                CourseProgress.create({
-                  course: courseId,
+                TestProgress.create({
+                  testseries: testSeriesId,
                   student: studentId,
-                  statusMap: [],
+                  answer_map: [],
                 })
                   .then((courseProgressSaved) => {
+                    console.log("cascbhjaschjj");
+                    console.log(courseProgressSaved);
                     //Adding course in student
-                    student.courses_enrolled.push(courseId);
+                    student.series_enrolled.push(testSeriesId);
+                    console.log("dsvsdvsdvdsfbdfbvsf");
                     student.save();
                     console.log("Saved ");
                     return {
@@ -87,4 +92,4 @@ const enrollStudent = async (studentId, courseId) => {
   }
 };
 
-module.exports.enrollStudent = enrollStudent;
+module.exports.enrollStudentTest = enrollStudentTest;

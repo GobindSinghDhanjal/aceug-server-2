@@ -13,7 +13,7 @@ const studentSchema = new Schema({
   hash: { type: String, required: true },
   salt: { type: String, required: true },
   courses_enrolled: {type:[mongoose.ObjectId], ref:'Course'},
-  series_enrolled: [mongoose.ObjectId],
+  series_enrolled: {type:[mongoose.ObjectId], ref:'TestSeries'},
   points: {type: Number, default: 0}
 },{
   timestamps: true,

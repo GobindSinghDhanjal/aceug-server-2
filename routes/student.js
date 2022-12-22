@@ -42,7 +42,6 @@ router.post("/login", (req, res, next) => {
     });
 });
 
-
 router.post("/register", (req, res, next) => {
   const saltHash = genPassword(req.body.password);
 
@@ -61,18 +60,20 @@ router.post("/register", (req, res, next) => {
     console.log(student);
   });
 
-  res.send({success: true, data:{message:"Successfully Registered"}});
+  res.send({ success: true, data: { message: "Successfully Registered" } });
 });
 
-router.route(
-  "/profile").get(passport.authenticate("jwt", { session: false }),
-  (req, res, next) => {
+router
+  .route("/profile")
+  .get(passport.authenticate("jwt", { session: false }), (req, res, next) => {
     res.status(200);
-    const userId = Student.findById(req.user._id).populate("courses_enrolled").then((student)=>{
-      res.send(student)
-    })
-  }
-);
+    const userId = Student.findById(req.user._id)
+      .populate("courses_enrolled")
+      .populate("series_enrolled")
+      .then((student) => {
+        res.send(student);
+      });
+  });
 
 // Visiting this route logs the user out
 router.get("/logout", (req, res, next) => {

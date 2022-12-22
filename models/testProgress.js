@@ -8,12 +8,12 @@ const answerSchema = new Schema({
 });
 
 const testProgressSchema = new Schema({
-  test: { type: mongoose.ObjectId, required: true },
+  test: { type: mongoose.ObjectId},
   student: { type: mongoose.ObjectId, required: true },
   testseries: { type: mongoose.ObjectId, required: true },
   answer_map: { type: [answerSchema], required: true },
-  score: { type: Number, required: true },
-  time_taken: { type: Number, required: true },
+  score: { type: Number},
+  time_taken: { type: Number},
 },{
   timestamps: true,
 });

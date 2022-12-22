@@ -18,9 +18,10 @@ const Instructor = require("./models/instructor");
 const Resource = require("./models/resources");
 const Module = require("./models/modules");
 const Blog = require("./models/blog")
-const TestSeries = require("./models/testSeries");
+const TestSeries = require("./models/testseries");
 const CourseEnrollments = require("./models/courseEnrollments");
 const Test = require("./models/test");
+const TestSeriesEnrollments = require("./models/testSeriesEnrolments");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -136,6 +137,7 @@ const adminOptions = {
     {resource: Blog, options: blogResourceOptions},
     {resource: Instructor},
     {resource: Test},
+    {resource: TestSeriesEnrollments},
     {resource: CourseEnrollments},
     {resource: Resource},
     {resource: Module},

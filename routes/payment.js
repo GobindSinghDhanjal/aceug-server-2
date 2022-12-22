@@ -4,6 +4,7 @@ const crypto = require("crypto");
 const router = express.Router();
 const passport = require("passport");
 const { enrollStudent } = require("../helpers/courseEnrollmentHelper");
+const { enrollStudentTest } = require("../helpers/testEnrollmentHelper");
 
 router.post("/orders", async (req, res) => {
     try {
@@ -58,8 +59,18 @@ router.post("/success",passport.authenticate("jwt", { session: false }), async (
         // YOU CAN SAVE THE DETAILS IN YOUR DATABASE IF YOU WANT
 
         if(notes.courseId){
+            console.log("inside1");
             const enrolled = enrollStudent(req.user._id, notes.courseId)
         }
+
+
+        console.log("hello");
+        if(notes.testId){
+            console.log("inside2");
+            const enrolled = enrollStudentTest(req.user._id, notes.testId)
+        }
+
+        console.log("byyye");
 
         res.json({
             msg: "success",
