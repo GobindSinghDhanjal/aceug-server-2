@@ -21,6 +21,7 @@ const Blog = require("./models/blog")
 const TestSeries = require("./models/testseries");
 const CourseEnrollments = require("./models/courseEnrollments");
 const Test = require("./models/test");
+const TestProgress = require("./models/testProgress");
 const TestSeriesEnrollments = require("./models/testSeriesEnrolments");
 
 var indexRouter = require("./routes/index");
@@ -132,6 +133,7 @@ const adminOptions = {
     // },
     { resource: Video },
     { resource: Student },
+    {resource : TestProgress},
     {resource : TestSeries},
     { resource: Course },
     {resource: Blog, options: blogResourceOptions},

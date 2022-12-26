@@ -55,6 +55,11 @@ const courseSchema = new Schema(
       type: Number,
       required: true,
     },
+    test_series:{
+      type:mongoose.ObjectId,
+      ref: "TestSeries",
+      required:true
+    },
     lectures: {
       type: Number,
       required: true,

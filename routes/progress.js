@@ -4,6 +4,7 @@ const TestProgress = require("../models/testProgress");
 const Student = require("../models/student");
 const Test = require("../models/test");
 const progressRouter = express.Router();
+const passport = require("passport")
 
 require("dotenv").config();
 
@@ -26,6 +27,12 @@ progressRouter
   .post((req, res, next) => {
     const testId = req.params.testId;
     const studentId = req.params.studentId;
+    // const answers = req.body.answers;
+    // console.log("hello");
+    // console.log(answers);
+
+    const data = req.body;
+    console.log(data);
 
     Student.findById(studentId)
       .then((student) => {
